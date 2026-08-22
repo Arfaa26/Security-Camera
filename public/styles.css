@@ -1785,21 +1785,68 @@ blockquote {
 
 .cta-direct-box {
   background: #FFFFFF;
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   padding: 26px;
   color: var(--text-dark);
   box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.cta-direct-box h3 {
+.consultant-photo-curved-frame {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  border-radius: 120px 120px 20px 20px;
+  overflow: hidden;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 10px 28px rgba(15, 36, 62, 0.15);
+  background: var(--deep-navy);
+}
+
+.consultant-headshot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.consultant-photo-curved-frame:hover .consultant-headshot-img {
+  transform: scale(1.04);
+}
+
+.consultant-live-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(15, 36, 62, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.consultant-details h3 {
   font-size: 19px;
   margin-bottom: 4px;
 }
 
-.cta-direct-box p {
+.consultant-details p {
   font-size: 12.5px;
   color: var(--text-muted);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .cta-btns-col {
