@@ -4,6 +4,13 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Developer Credit Console Signature
+  console.log(
+    `%c ⚡ Designed & Developed by Arfa Altaf %c LinkedIn: https://www.linkedin.com/in/arfa-altaf-1050a827b/ | GitHub: https://github.com/Arfaa26 `,
+    'background: #0F243E; color: #67BAF4; font-size: 12px; font-weight: bold; padding: 6px 10px; border-radius: 4px 0 0 4px;',
+    'background: #388EE6; color: #FFFFFF; font-size: 12px; font-weight: 600; padding: 6px 10px; border-radius: 0 4px 4px 0;'
+  );
+
   // 1. Dynamic Copyright Year
   const yearEl = document.getElementById('copyrightYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
