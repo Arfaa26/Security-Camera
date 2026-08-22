@@ -341,6 +341,71 @@ p {
   padding: 4px;
 }
 
+/* Header Quick Action Strip */
+.header-quick-action-strip {
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-soft-blue);
+  padding: 8px 0;
+}
+
+.header-quick-inner {
+  width: min(1240px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.h-quick-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--deep-navy);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.h-quick-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--sky-blue);
+}
+
+.h-quick-btn.highlight-wa {
+  background: linear-gradient(135deg, #E5F3FD, #D0E9FC);
+  border-color: rgba(56, 142, 230, 0.4);
+}
+
+.h-quick-icon {
+  font-size: 20px;
+}
+
+.h-quick-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.h-quick-info small {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.h-quick-info strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--deep-navy);
+  line-height: 1.15;
+}
+
 /* ==========================================================================
    2. HERO SECTION (ILLUMINATED 3D SHOWROOM ARTWORK)
    ========================================================================== */
@@ -2180,4 +2245,27 @@ blockquote {
   .footer-container { grid-template-columns: 1fr; }
   .footer-legal-bar { flex-direction: column; text-align: center; gap: 8px; }
   .creator-credits { justify-content: center; }
+
+  .header-quick-inner {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .h-quick-btn {
+    padding: 6px 6px;
+    gap: 6px;
+    min-height: 42px;
+  }
+
+  .h-quick-icon {
+    font-size: 16px;
+  }
+
+  .h-quick-info small {
+    font-size: 8px;
+  }
+
+  .h-quick-info strong {
+    font-size: 11px;
+  }
 }
