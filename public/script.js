@@ -1,6 +1,6 @@
 /**
  * AAN Security & IT Solutions — Executive Corporate Controller
- * Interactive Storage Calculator, Day/Night Lab, Modals, and WhatsApp Quotation Builders
+ * Interactive Storage Calculator, Day/Night Lab, Modals, Fullscreen Album Lightbox, and WhatsApp Quotation Builders
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,7 +43,131 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 7. Modals & Consultation Forms
   initModalsAndForms();
+
+  // 8. Fullscreen Project Album Lightbox
+  initGalleryLightbox();
 });
+
+/* ==========================================================================
+   FULLSCREEN PROJECT ALBUM LIGHTBOX
+   ========================================================================== */
+function initGalleryLightbox() {
+  const lightbox = document.getElementById('galleryLightbox');
+  const backdrop = document.getElementById('lightboxBackdrop');
+  const closeBtn = document.getElementById('lightboxClose');
+  const prevBtn = document.getElementById('lightboxPrev');
+  const nextBtn = document.getElementById('lightboxNext');
+
+  const imgEl = document.getElementById('lightboxImg');
+  const counterEl = document.getElementById('lightboxCounter');
+  const tagEl = document.getElementById('lightboxTag');
+  const locEl = document.getElementById('lightboxLocation');
+  const titleEl = document.getElementById('lightboxTitle');
+  const descEl = document.getElementById('lightboxDesc');
+  const waBtn = document.getElementById('lightboxWaBtn');
+
+  const items = document.querySelectorAll('.clickable-gallery-item');
+  if (!lightbox || !items.length) return;
+
+  let currentIndex = 0;
+  const albumData = [];
+
+  items.forEach((item, idx) => {
+    albumData.push({
+      img: item.dataset.img || '',
+      title: item.dataset.title || '',
+      location: item.dataset.location || '',
+      tag: item.dataset.tag || '',
+      desc: item.dataset.desc || ''
+    });
+
+    item.addEventListener('click', (e) => {
+      // If user clicked the direct WhatsApp link inside card, let it open
+      if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('https://wa.me')) {
+        return;
+      }
+      openLightbox(idx);
+    });
+  });
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightbox() {
+    const data = albumData[currentIndex];
+    if (!data) return;
+
+    if (imgEl) {
+      imgEl.src = data.img;
+      imgEl.alt = data.title;
+    }
+    if (counterEl) counterEl.textContent = `Project ${currentIndex + 1} of ${albumData.length}`;
+    if (tagEl) tagEl.textContent = data.tag;
+    if (locEl) locEl.textContent = data.location;
+    if (titleEl) titleEl.textContent = data.title;
+    if (descEl) descEl.textContent = data.desc;
+
+    if (waBtn) {
+      const waMsg = `Hello Mr. Alekar (AAN Security and IT Solutions), I saw your live project "${data.title}" (${data.location}) and I want to get a quote for a similar setup for my property.`;
+      waBtn.href = `https://wa.me/917218197119?text=${encodeURIComponent(waMsg)}`;
+    }
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % albumData.length;
+    updateLightbox();
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + albumData.length) % albumData.length;
+    updateLightbox();
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (backdrop) backdrop.addEventListener('click', closeLightbox);
+  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
+
+  // Touch Swipe for Mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 50) {
+      if (diff < 0) showNext();
+      else showPrev();
+    }
+  }
+}
 
 /* ==========================================================================
    CCTV STORAGE CALCULATOR
@@ -185,7 +309,7 @@ function initAreaChecker() {
   const validAreas = [
     'mahad', 'mangaon', 'poladpur', 'birwadi', 'lonere', 'goregaon', 
     'nizampur', 'khed', 'dasgaon', 'nandgaon', 'vinhere', 'indapur', 
-    'varandh', 'tala', 'shrivardhan', 'nagothane', 'roha', 'raigad', 'rajewadi'
+    'varandh', 'tala', 'shrivardhan', 'nagothane', 'roha', 'raigad', 'rajewadi', 'pale', 'kamble'
   ];
 
   function check() {
