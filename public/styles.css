@@ -1,24 +1,32 @@
 :root {
-  --bg: #06100f;
-  --bg2: #0a1816;
-  --panel: #0f2420;
-  --panel2: #14302b;
-  --teal: #0c615c;
-  --teal2: #12837b;
-  --teal-glow: rgba(18, 131, 123, 0.25);
-  --gold: #d8aa48;
-  --gold2: #f6d892;
-  --gold-glow: rgba(216, 170, 72, 0.22);
-  --text: #f0f7f5;
-  --muted: #a1b8b3;
-  --muted-dark: #6e8883;
-  --line: rgba(215, 235, 230, 0.12);
-  --line-gold: rgba(216, 170, 72, 0.32);
-  --white: #ffffff;
+  /* Brand Palette from Swatch */
+  --deep-blue: #1E466B;
+  --deep-blue-dark: #14324D;
+  --sky-blue: #67BAF4;
+  --sky-blue-hover: #4FA8E8;
+  --sky-blue-glow: rgba(103, 186, 244, 0.28);
+  --soft-white: #FAFAFA;
+  --soft-white-2: #F0F5FA;
+  --soft-white-card: #FFFFFF;
+  --charcoal: #1F1E19;
+  --charcoal-light: #2D2C26;
+  --muted: #5C6E7E;
+  --muted-dark: #8294A5;
+  --line: rgba(30, 70, 107, 0.14);
+  --line-sky: rgba(103, 186, 244, 0.45);
+  
+  /* Semantic Tokens */
+  --bg: #0F2336;
+  --bg-section-light: #FAFAFA;
+  --panel: #163652;
+  --panel-card: #1B4061;
+  --text-dark: #1F1E19;
+  --text-light: #FAFAFA;
+  --text-muted-light: #B4CADB;
   --radius: 24px;
   --radius-sm: 14px;
-  --shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
-  --shadow-gold: 0 10px 30px rgba(216, 170, 72, 0.18);
+  --shadow: 0 20px 50px rgba(20, 50, 77, 0.28);
+  --shadow-light: 0 12px 36px rgba(30, 70, 107, 0.08);
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Manrope', 'Inter', system-ui, sans-serif;
 }
@@ -36,23 +44,21 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle at 75% 8%, rgba(18, 131, 123, 0.15), transparent 32%),
-              radial-gradient(circle at 20% 45%, rgba(216, 170, 72, 0.06), transparent 28%),
-              var(--bg);
-  color: var(--text);
+  background: radial-gradient(circle at 80% 8%, rgba(103, 186, 244, 0.18), transparent 35%),
+              radial-gradient(circle at 15% 45%, rgba(30, 70, 107, 0.35), transparent 30%),
+              #0D2032;
+  color: var(--text-light);
   font-family: var(--font-sans);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Subtle background noise */
 .noise {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
   z-index: 99;
 }
@@ -61,7 +67,7 @@ body {
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 800;
-  color: var(--text);
+  color: var(--text-light);
   margin: 0 0 0.5em;
   letter-spacing: -0.03em;
 }
@@ -85,25 +91,25 @@ h3 {
 
 h1 em, h2 em {
   font-style: normal;
-  color: var(--gold2);
-  text-shadow: 0 0 24px var(--gold-glow);
+  color: var(--sky-blue);
+  text-shadow: 0 0 24px var(--sky-blue-glow);
 }
 
 p {
   margin: 0 0 1em;
-  color: var(--muted);
+  color: var(--text-muted-light);
   font-size: 15px;
   line-height: 1.7;
 }
 
 a {
-  color: var(--gold2);
+  color: var(--sky-blue);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--white);
+  color: var(--soft-white);
 }
 
 .eyebrow {
@@ -112,7 +118,7 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold2);
+  color: var(--sky-blue);
   font-weight: 800;
   margin-bottom: 14px;
 }
@@ -121,10 +127,10 @@ a:hover {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background: #54d4b5;
+  background: var(--sky-blue);
   border-radius: 50%;
   margin-right: 10px;
-  box-shadow: 0 0 0 5px rgba(84, 212, 181, 0.18);
+  box-shadow: 0 0 0 5px rgba(103, 186, 244, 0.25);
   animation: pulseAnim 2.2s infinite;
 }
 
@@ -157,39 +163,39 @@ a:hover {
 }
 
 .btn-gold {
-  background: linear-gradient(135deg, var(--gold2), var(--gold));
-  color: #0c1815;
-  box-shadow: 0 8px 24px rgba(216, 170, 72, 0.28);
+  background: linear-gradient(135deg, var(--sky-blue), #459DE0);
+  color: #0E2438;
+  box-shadow: 0 8px 24px rgba(103, 186, 244, 0.35);
 }
 
 .btn-gold:hover {
-  box-shadow: 0 12px 32px rgba(216, 170, 72, 0.42);
-  background: linear-gradient(135deg, #fff2be, var(--gold));
+  box-shadow: 0 12px 32px rgba(103, 186, 244, 0.5);
+  background: linear-gradient(135deg, #8CD0FF, var(--sky-blue));
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
   border: 1px solid var(--line);
   backdrop-filter: blur(8px);
 }
 
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: var(--white);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--soft-white);
 }
 
 .btn-outline {
-  background: rgba(216, 170, 72, 0.04);
-  color: var(--gold2);
-  border: 1px solid var(--line-gold);
+  background: rgba(103, 186, 244, 0.06);
+  color: var(--sky-blue);
+  border: 1px solid var(--line-sky);
 }
 
 .btn-outline:hover {
-  background: rgba(216, 170, 72, 0.12);
-  border-color: var(--gold);
-  color: var(--white);
+  background: rgba(103, 186, 244, 0.16);
+  border-color: var(--sky-blue);
+  color: var(--soft-white);
 }
 
 .btn-lg {
@@ -223,7 +229,9 @@ a:hover {
   margin-top: 36px;
 }
 
-/* Site Header */
+/* =========================================================
+   1. SITE HEADER & NAVBAR (SOFT WHITE #FAFAFA)
+   ========================================================= */
 .site-header {
   position: fixed;
   top: 18px;
@@ -235,26 +243,25 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 10px 18px;
-  border: 1px solid var(--line);
-  background: rgba(6, 16, 15, 0.82);
-  backdrop-filter: blur(20px);
+  padding: 10px 22px;
+  border: 1px solid rgba(30, 70, 107, 0.15);
+  background: rgba(250, 250, 250, 0.94); /* Soft White Palette */
+  backdrop-filter: blur(22px);
   border-radius: 999px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 14px 40px rgba(15, 35, 54, 0.16);
   transition: all 0.3s ease;
 }
 
 .site-header.scrolled {
   top: 10px;
-  background: rgba(6, 16, 15, 0.94);
-  border-color: rgba(216, 170, 72, 0.3);
+  background: rgba(250, 250, 250, 0.98);
+  box-shadow: 0 18px 45px rgba(15, 35, 54, 0.22);
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: var(--text);
   text-decoration: none;
   min-width: max-content;
 }
@@ -264,25 +271,12 @@ a:hover {
   width: auto;
   display: block;
   object-fit: contain;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 2px 8px rgba(30, 70, 107, 0.25));
   transition: transform 0.25s ease;
 }
 
 .brand-logo:hover {
   transform: scale(1.03);
-}
-
-.footer-brand-logo-wrap {
-  display: inline-block;
-  margin-bottom: 12px;
-}
-
-.footer-brand-logo {
-  height: 76px;
-  width: auto;
-  display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.6));
 }
 
 .nav {
@@ -292,36 +286,43 @@ a:hover {
 }
 
 .nav a {
-  color: #b3ccc7;
+  color: var(--deep-blue); /* Deep Blue nav text */
   font-size: 13px;
-  font-weight: 500;
-  padding: 8px 12px;
+  font-weight: 600;
+  padding: 8px 14px;
   border-radius: 999px;
   transition: all 0.2s ease;
 }
 
 .nav a:hover {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.07);
+  color: var(--deep-blue-dark);
+  background: rgba(103, 186, 244, 0.18);
 }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.site-header .btn-ghost {
+  background: #E8F2FA;
+  color: var(--deep-blue);
+  border: 1px solid rgba(30, 70, 107, 0.18);
+}
+
+.site-header .btn-ghost:hover {
+  background: #D9EBFA;
+  color: var(--deep-blue-dark);
 }
 
 .menu-toggle {
   display: none;
   background: none;
   border: 0;
-  color: var(--text);
+  color: var(--deep-blue);
   font-size: 24px;
   cursor: pointer;
   padding: 6px;
 }
 
-/* HERO SECTION */
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
 .hero {
   min-height: 800px;
   padding-top: 160px;
@@ -336,7 +337,7 @@ a:hover {
   line-height: 1.8;
   max-width: 600px;
   margin: 22px 0 32px;
-  color: var(--muted);
+  color: var(--text-muted-light);
 }
 
 .hero-actions {
@@ -350,19 +351,19 @@ a:hover {
   align-items: center;
   gap: 12px;
   font-size: 13px;
-  color: #8faea8;
+  color: #8EB2CE;
   margin-top: 28px;
 }
 
 .highlight-text {
-  color: var(--gold2);
+  color: var(--sky-blue);
   font-weight: 700;
 }
 
 .dot {
   width: 4px;
   height: 4px;
-  background: var(--gold);
+  background: var(--sky-blue);
   border-radius: 50%;
 }
 
@@ -372,7 +373,7 @@ a:hover {
   flex-wrap: wrap;
   margin-top: 30px;
   padding-top: 24px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .guarantee-item {
@@ -380,11 +381,11 @@ a:hover {
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: var(--text);
+  color: var(--soft-white);
 }
 
 .guarantee-item b {
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 /* Hero Visual Orb */
@@ -400,9 +401,9 @@ a:hover {
   height: 300px;
   border-radius: 50%;
   position: relative;
-  background: radial-gradient(circle at 45% 42%, #1b3d37 0 8%, #0a1816 25%, #050d0c 60%, #0d221e 100%);
-  border: 2px solid rgba(216, 170, 72, 0.45);
-  box-shadow: 0 0 80px rgba(18, 131, 123, 0.3), inset 0 0 50px rgba(0, 0, 0, 0.9);
+  background: radial-gradient(circle at 45% 42%, #1F4A70 0 8%, #14324D 25%, #0B1D2D 60%, #173B5C 100%);
+  border: 2px solid var(--line-sky);
+  box-shadow: 0 0 80px rgba(103, 186, 244, 0.3), inset 0 0 50px rgba(0, 0, 0, 0.9);
   display: grid;
   place-items: center;
   z-index: 2;
@@ -412,9 +413,9 @@ a:hover {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 2px solid #caa359;
-  background: radial-gradient(circle, #000000 0 10%, #102624 11% 24%, #040807 25% 35%, #1c4540 36% 44%, #040706 45%);
-  box-shadow: 0 0 35px rgba(216, 170, 72, 0.3), inset 0 0 20px #000;
+  border: 2px solid #5CAFE8;
+  background: radial-gradient(circle, #000000 0 10%, #0E2942 11% 24%, #040E17 25% 35%, #19466E 36% 44%, #040E17 45%);
+  box-shadow: 0 0 35px rgba(103, 186, 244, 0.35), inset 0 0 20px #000;
   display: grid;
   place-items: center;
 }
@@ -423,8 +424,8 @@ a:hover {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #54d4b5;
-  box-shadow: 0 0 24px #54d4b5;
+  background: var(--sky-blue);
+  box-shadow: 0 0 24px var(--sky-blue);
 }
 
 .orb-label {
@@ -432,25 +433,25 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.14em;
   font-weight: 700;
-  color: #d6e8e4;
+  color: #D2E7F7;
 }
 
 .orb-label.top {
   top: 48px;
-  color: #ff7667;
+  color: #FF7B6E;
 }
 
 .orb-label.bottom {
   bottom: 48px;
   font-size: 10px;
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .radar {
   position: absolute;
   width: 460px;
   height: 460px;
-  border: 1px solid rgba(84, 212, 181, 0.14);
+  border: 1px solid rgba(103, 186, 244, 0.16);
   border-radius: 50%;
 }
 
@@ -458,7 +459,7 @@ a:hover {
   content: "";
   position: absolute;
   inset: 50px;
-  border: 1px solid rgba(84, 212, 181, 0.1);
+  border: 1px solid rgba(103, 186, 244, 0.1);
   border-radius: 50%;
 }
 
@@ -470,7 +471,7 @@ a:hover {
   position: absolute;
   width: 260px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--sky-blue), transparent);
   animation: scanAnim 4.5s ease-in-out infinite;
   z-index: 4;
 }
@@ -486,8 +487,8 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 12px;
-  border: 1px solid rgba(216, 170, 72, 0.35);
-  background: rgba(8, 22, 19, 0.84);
+  border: 1px solid var(--line-sky);
+  background: rgba(20, 48, 74, 0.88);
   backdrop-filter: blur(16px);
   padding: 12px 18px;
   border-radius: 18px;
@@ -498,42 +499,44 @@ a:hover {
   display: block;
   font-family: var(--font-display);
   font-size: 13px;
-  color: var(--text);
+  color: var(--soft-white);
 }
 
 .floating-chip small {
   display: block;
   font-size: 11px;
-  color: var(--muted);
+  color: #9EC7E6;
 }
 
 .chip-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--sky-blue);
 }
 
-.chip-dot.active-green { background: #54d4b5; box-shadow: 0 0 10px #54d4b5; }
-.chip-dot.active-gold { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+.chip-dot.active-green { background: #54D4B5; box-shadow: 0 0 10px #54D4B5; }
+.chip-dot.active-gold { background: var(--sky-blue); box-shadow: 0 0 10px var(--sky-blue); }
 
 .chip-a { top: 70px; right: 10px; }
 .chip-b { bottom: 80px; left: 10px; }
 .chip-c { top: 280px; right: -20px; }
 
-/* TRUST STRIP */
+/* =========================================================
+   TRUST STRIP & BRAND TICKER
+   ========================================================= */
 .trust-strip {
   width: 100%;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  background: rgba(255, 255, 255, 0.015);
+  background: rgba(30, 70, 107, 0.15);
 }
 
 .trust-card {
   padding: 24px 28px;
-  border-right: 1px solid var(--line);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -546,19 +549,18 @@ a:hover {
 .trust-card strong {
   font-family: var(--font-display);
   font-size: 14px;
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .trust-card span {
   font-size: 12px;
-  color: var(--muted);
+  color: #B2CDE2;
 }
 
-/* BRAND PARTNERS TICKER */
 .brand-ecosystem-strip {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 22px 20px;
-  background: rgba(10, 24, 22, 0.5);
+  background: rgba(14, 34, 52, 0.6);
 }
 
 .brand-strip-inner {
@@ -589,20 +591,22 @@ a:hover {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 999px;
-  color: #b7cdc9;
+  color: #C0DBF0;
   transition: all 0.2s ease;
 }
 
 .brand-pill:hover {
-  border-color: var(--gold);
-  color: var(--gold2);
-  background: rgba(216, 170, 72, 0.08);
+  border-color: var(--sky-blue);
+  color: var(--soft-white);
+  background: rgba(103, 186, 244, 0.18);
 }
 
-/* 01 / CAMERA GRID */
+/* =========================================================
+   01 / CAMERA GRID
+   ========================================================= */
 .camera-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -610,9 +614,9 @@ a:hover {
 }
 
 .camera-card {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.18);
   border-radius: var(--radius);
-  background: linear-gradient(145deg, rgba(20, 48, 44, 0.6), rgba(7, 17, 15, 0.8));
+  background: linear-gradient(145deg, #183C5C, #102B45);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -623,15 +627,15 @@ a:hover {
 
 .camera-card:hover {
   transform: translateY(-6px);
-  border-color: var(--line-gold);
+  border-color: var(--sky-blue);
   box-shadow: var(--shadow);
 }
 
 .camera-visual-box {
   height: 130px;
   border-radius: var(--radius-sm);
-  background: radial-gradient(circle at 50% 40%, rgba(18, 131, 123, 0.35), transparent 70%), #071412;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: radial-gradient(circle at 50% 40%, rgba(103, 186, 244, 0.35), transparent 70%), #0D2236;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: grid;
   place-items: center;
   margin-bottom: 16px;
@@ -646,7 +650,7 @@ a:hover {
 .camera-card p {
   font-size: 13px;
   line-height: 1.55;
-  color: var(--muted);
+  color: var(--text-muted-light);
   flex: 1;
   margin-bottom: 14px;
 }
@@ -663,10 +667,10 @@ a:hover {
   font-weight: 700;
   letter-spacing: 0.06em;
   padding: 4px 9px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.25);
   border-radius: 999px;
-  color: #b7cdc9;
-  background: rgba(255, 255, 255, 0.02);
+  color: #C0DBF0;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .camera-card button {
@@ -676,24 +680,26 @@ a:hover {
   text-align: left;
   font-size: 12px;
   font-weight: 700;
-  color: var(--gold2);
+  color: var(--sky-blue);
   cursor: pointer;
   transition: color 0.2s ease;
 }
 
 .camera-card button:hover {
-  color: var(--white);
+  color: var(--soft-white);
 }
 
-/* 02 / COMPLETE SOLUTIONS */
+/* =========================================================
+   02 / COMPLETE SOLUTIONS
+   ========================================================= */
 .feature-dark {
   max-width: none;
   width: 100%;
   padding-left: max(20px, calc((100% - 1200px) / 2));
   padding-right: max(20px, calc((100% - 1200px) / 2));
-  background: linear-gradient(180deg, rgba(10, 24, 22, 0.8), rgba(6, 16, 15, 0.95));
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(14, 36, 56, 0.9), rgba(10, 26, 42, 0.98));
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .solution-grid {
@@ -704,9 +710,9 @@ a:hover {
 
 .solution-card {
   padding: 30px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.16);
   border-radius: var(--radius);
-  background: rgba(8, 20, 18, 0.7);
+  background: rgba(18, 44, 69, 0.7);
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -716,7 +722,7 @@ a:hover {
 
 .solution-card:hover {
   transform: translateY(-5px);
-  border-color: var(--line-gold);
+  border-color: var(--sky-blue);
   box-shadow: var(--shadow);
 }
 
@@ -731,7 +737,7 @@ a:hover {
   font-family: var(--font-display);
   font-size: 14px;
   font-weight: 800;
-  color: rgba(216, 170, 72, 0.4);
+  color: rgba(103, 186, 244, 0.45);
 }
 
 .solution-icon {
@@ -747,7 +753,7 @@ a:hover {
 .solution-card p {
   font-size: 14px;
   line-height: 1.65;
-  color: var(--muted);
+  color: var(--text-muted-light);
 }
 
 .solution-tags {
@@ -760,10 +766,10 @@ a:hover {
 .solution-tags span {
   font-size: 11px;
   padding: 4px 10px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.22);
   border-radius: 999px;
-  color: #b7cdc9;
-  background: rgba(255, 255, 255, 0.02);
+  color: #C0DBF0;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .solution-check {
@@ -774,7 +780,7 @@ a:hover {
 
 .solution-check span {
   font-size: 13px;
-  color: #cfe1dd;
+  color: #D2E6F5;
 }
 
 .card-action-btn {
@@ -785,19 +791,21 @@ a:hover {
   padding: 0;
   font-size: 13px;
   font-weight: 700;
-  color: var(--gold2);
+  color: var(--sky-blue);
   cursor: pointer;
 }
 
 .card-action-btn:hover {
-  color: var(--white);
+  color: var(--soft-white);
 }
 
-/* 03 / STORAGE CALCULATOR SECTION */
+/* =========================================================
+   03 / STORAGE CALCULATOR SECTION
+   ========================================================= */
 .storage-calc-card {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
-  background: linear-gradient(145deg, #0e2421, #06110f);
+  background: linear-gradient(145deg, #173857, #0F263D);
   box-shadow: var(--shadow);
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -818,14 +826,14 @@ a:hover {
 .calc-group label {
   font-size: 13px;
   font-weight: 700;
-  color: #cfe1dd;
+  color: #D2E6F5;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .calc-group label strong {
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .stepper-row {
@@ -838,9 +846,9 @@ a:hover {
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--white);
+  border: 1px solid rgba(103, 186, 244, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--soft-white);
   font-size: 20px;
   cursor: pointer;
   display: grid;
@@ -849,16 +857,16 @@ a:hover {
 }
 
 .stepper-btn:hover {
-  background: rgba(216, 170, 72, 0.2);
-  border-color: var(--gold);
+  background: rgba(103, 186, 244, 0.25);
+  border-color: var(--sky-blue);
 }
 
 .stepper-row input[type="range"] {
   flex: 1;
-  accent-color: var(--gold);
+  accent-color: var(--sky-blue);
   height: 8px;
   border-radius: 4px;
-  background: #14302c;
+  background: #112B42;
   cursor: pointer;
 }
 
@@ -866,16 +874,16 @@ a:hover {
   width: 100%;
   padding: 13px 16px;
   border-radius: 14px;
-  border: 1px solid var(--line);
-  background: #081614;
-  color: var(--text);
+  border: 1px solid rgba(103, 186, 244, 0.25);
+  background: #0E2236;
+  color: var(--soft-white);
   font-family: var(--font-sans);
   font-size: 14px;
   outline: none;
 }
 
 .calc-select:focus {
-  border-color: var(--gold);
+  border-color: var(--sky-blue);
 }
 
 .pill-selector {
@@ -889,9 +897,9 @@ a:hover {
   min-width: 100px;
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
-  color: #b7cdc9;
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  color: #B6D5EE;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -899,21 +907,21 @@ a:hover {
 }
 
 .pill-btn:hover {
-  border-color: rgba(216, 170, 72, 0.5);
-  color: var(--white);
+  border-color: var(--sky-blue);
+  color: var(--soft-white);
 }
 
 .pill-btn.active {
-  background: rgba(216, 170, 72, 0.12);
-  border-color: var(--gold);
-  color: var(--gold2);
+  background: rgba(103, 186, 244, 0.2);
+  border-color: var(--sky-blue);
+  color: var(--sky-blue);
   font-weight: 700;
 }
 
 .calc-output-panel {
-  border: 1px solid rgba(216, 170, 72, 0.35);
+  border: 1px solid var(--line-sky);
   border-radius: var(--radius-sm);
-  background: radial-gradient(circle at 80% 20%, rgba(216, 170, 72, 0.12), transparent 45%), #0a1b18;
+  background: radial-gradient(circle at 80% 20%, rgba(103, 186, 244, 0.18), transparent 50%), #122C45;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -927,9 +935,9 @@ a:hover {
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.12em;
-  background: rgba(216, 170, 72, 0.15);
-  color: var(--gold2);
-  border: 1px solid var(--line-gold);
+  background: rgba(103, 186, 244, 0.18);
+  color: var(--sky-blue);
+  border: 1px solid var(--line-sky);
   margin-bottom: 8px;
 }
 
@@ -943,7 +951,7 @@ a:hover {
   padding: 18px;
   background: rgba(0, 0, 0, 0.35);
   border-radius: 16px;
-  border: 1px solid rgba(216, 170, 72, 0.25);
+  border: 1px solid rgba(103, 186, 244, 0.3);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -953,13 +961,13 @@ a:hover {
   font-family: var(--font-display);
   font-size: 46px;
   font-weight: 800;
-  color: var(--gold2);
+  color: var(--sky-blue);
   line-height: 1;
 }
 
 .hdd-label {
   font-size: 12px;
-  color: #cfe1dd;
+  color: #D2E6F5;
 }
 
 .output-metrics-grid {
@@ -973,7 +981,7 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .metric-box small {
@@ -985,7 +993,7 @@ a:hover {
 
 .metric-box strong {
   font-size: 13px;
-  color: var(--text);
+  color: var(--soft-white);
 }
 
 .calc-actions {
@@ -1001,7 +1009,9 @@ a:hover {
   line-height: 1.5;
 }
 
-/* 04 / INDUSTRIES LAYOUT */
+/* =========================================================
+   04 / INDUSTRIES LAYOUT
+   ========================================================= */
 .industry-layout {
   display: grid;
   grid-template-columns: 0.75fr 1.25fr;
@@ -1014,9 +1024,9 @@ a:hover {
 }
 
 .industry-list button {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.15);
   background: rgba(255, 255, 255, 0.02);
-  color: var(--muted);
+  color: var(--text-muted-light);
   padding: 16px 20px;
   text-align: left;
   border-radius: var(--radius-sm);
@@ -1031,24 +1041,24 @@ a:hover {
 }
 
 .industry-list button span {
-  color: var(--gold);
+  color: var(--sky-blue);
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 12px;
 }
 
 .industry-list button.active, .industry-list button:hover {
-  background: var(--teal);
-  color: var(--white);
-  border-color: var(--line-gold);
+  background: var(--deep-blue);
+  color: var(--soft-white);
+  border-color: var(--sky-blue);
 }
 
 .industry-panel {
   min-height: 480px;
   border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: radial-gradient(circle at 75% 25%, rgba(18, 131, 123, 0.28), transparent 40%),
-              linear-gradient(145deg, #112925, #071412);
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: radial-gradient(circle at 75% 25%, rgba(103, 186, 244, 0.22), transparent 40%),
+              linear-gradient(145deg, #183C5C, #0F263D);
   padding: 40px;
   display: flex;
   flex-direction: column;
@@ -1061,7 +1071,7 @@ a:hover {
   font-family: var(--font-display);
   font-size: 80px;
   font-weight: 800;
-  color: rgba(216, 170, 72, 0.12);
+  color: rgba(103, 186, 244, 0.12);
   position: absolute;
   top: 25px;
   left: 40px;
@@ -1087,15 +1097,15 @@ a:hover {
 
 .mini-stats span {
   padding: 8px 14px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: 999px;
   font-size: 12px;
-  color: #cfe1dd;
-  background: rgba(255, 255, 255, 0.02);
+  color: #D2E6F5;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .mini-stats b {
-  color: var(--gold2);
+  color: var(--sky-blue);
   margin-right: 6px;
 }
 
@@ -1107,7 +1117,7 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.16em;
   font-weight: 800;
-  color: var(--gold);
+  color: var(--sky-blue);
   margin-bottom: 10px;
 }
 
@@ -1119,14 +1129,16 @@ a:hover {
 
 .industry-stack-list span {
   font-size: 12px;
-  color: #cfe1dd;
+  color: #D2E6F5;
   padding: 6px 12px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* 05 / PROPERTY PLANNER & 2D BLUEPRINT */
+/* =========================================================
+   05 / PROPERTY PLANNER & 2D BLUEPRINT
+   ========================================================= */
 .planner {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -1136,10 +1148,10 @@ a:hover {
 .property-map {
   min-height: 520px;
   border-radius: var(--radius);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.25);
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #223e38 0%, #102622 50%, #0c1c19 100%);
+  background: linear-gradient(135deg, #183C5C 0%, #102B45 50%, #0C2136 100%);
   box-shadow: var(--shadow);
 }
 
@@ -1147,8 +1159,8 @@ a:hover {
   position: absolute;
   inset: 0;
   opacity: 0.25;
-  background: linear-gradient(90deg, transparent 49%, rgba(255, 255, 255, 0.3) 50%, transparent 51%),
-              linear-gradient(0deg, transparent 49%, rgba(255, 255, 255, 0.3) 50%, transparent 51%);
+  background: linear-gradient(90deg, transparent 49%, rgba(103, 186, 244, 0.4) 50%, transparent 51%),
+              linear-gradient(0deg, transparent 49%, rgba(103, 186, 244, 0.4) 50%, transparent 51%);
   background-size: 60px 60px;
 }
 
@@ -1158,24 +1170,24 @@ a:hover {
   top: 44%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  background: rgba(6, 16, 15, 0.9);
-  color: var(--gold2);
+  background: rgba(14, 34, 52, 0.94);
+  color: var(--sky-blue);
   font-family: var(--font-display);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.14em;
   padding: 8px 16px;
   border-radius: 999px;
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--line-sky);
   pointer-events: none;
 }
 
 .zone {
   position: absolute;
   z-index: 3;
-  border: 1px solid var(--line);
-  background: #09201c;
-  color: #cfe1dd;
+  border: 1px solid rgba(103, 186, 244, 0.35);
+  background: #112B42;
+  color: #D2E6F5;
   padding: 8px 14px;
   border-radius: 999px;
   font-family: var(--font-sans);
@@ -1188,10 +1200,10 @@ a:hover {
 }
 
 .zone.active, .zone:hover {
-  background: var(--gold);
-  color: #0c1815;
-  border-color: var(--gold2);
-  box-shadow: 0 8px 24px rgba(216, 170, 72, 0.45);
+  background: var(--sky-blue);
+  color: #0E2438;
+  border-color: #8CD0FF;
+  box-shadow: 0 8px 24px rgba(103, 186, 244, 0.45);
 }
 
 .z1 { left: 45%; top: 10%; }
@@ -1210,8 +1222,8 @@ a:hover {
   height: 0;
   border-left: 110px solid transparent;
   border-right: 110px solid transparent;
-  border-bottom: 240px solid rgba(216, 170, 72, 0.22);
-  filter: drop-shadow(0 0 12px rgba(216, 170, 72, 0.35));
+  border-bottom: 240px solid rgba(103, 186, 244, 0.25);
+  filter: drop-shadow(0 0 12px rgba(103, 186, 244, 0.4));
   transform-origin: 50% 100%;
   left: 45%;
   top: 64%;
@@ -1228,22 +1240,22 @@ a:hover {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #06110f;
-  color: var(--gold2);
-  border: 2px solid var(--gold);
+  background: #0B1D2D;
+  color: var(--sky-blue);
+  border: 2px solid var(--sky-blue);
   display: grid;
   place-items: center;
   z-index: 4;
   transform: translate(-50%, -50%);
   transition: all 0.4s ease;
-  box-shadow: 0 0 16px rgba(216, 170, 72, 0.4);
+  box-shadow: 0 0 16px rgba(103, 186, 244, 0.45);
 }
 
 .planner-info {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
   padding: 34px;
-  background: linear-gradient(145deg, #102622, #071412);
+  background: linear-gradient(145deg, #173857, #0F263D);
   display: flex;
   flex-direction: column;
 }
@@ -1263,26 +1275,26 @@ a:hover {
   display: flex;
   justify-content: space-between;
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 13px;
-  color: var(--muted);
+  color: var(--text-muted-light);
 }
 
 .spec-list strong {
-  color: #cfe1dd;
+  color: #D2E6F5;
 }
 
 .planner-block {
   margin-top: 18px;
   padding-top: 16px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .planner-block-label {
   font-size: 11px;
   letter-spacing: 0.14em;
   font-weight: 800;
-  color: var(--gold);
+  color: var(--sky-blue);
   margin-bottom: 12px;
 }
 
@@ -1294,12 +1306,12 @@ a:hover {
 
 .camera-style-row button {
   text-align: left;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-sm);
   padding: 10px 12px;
   cursor: pointer;
-  color: var(--text);
+  color: var(--soft-white);
   transition: all 0.2s ease;
 }
 
@@ -1307,17 +1319,17 @@ a:hover {
   display: block;
   font-family: var(--font-display);
   font-size: 13px;
-  color: var(--text);
+  color: var(--soft-white);
 }
 
 .camera-style-row button small {
   font-size: 11px;
-  color: var(--muted);
+  color: #9EC7E6;
 }
 
 .camera-style-row button.active {
-  border-color: var(--gold);
-  background: rgba(216, 170, 72, 0.12);
+  border-color: var(--sky-blue);
+  background: rgba(103, 186, 244, 0.18);
 }
 
 .priority-chips {
@@ -1327,9 +1339,9 @@ a:hover {
 }
 
 .priority-chips button {
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
-  color: #b7cdc9;
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  color: #B6D5EE;
   border-radius: 999px;
   padding: 8px 14px;
   font-size: 12px;
@@ -1338,16 +1350,16 @@ a:hover {
 }
 
 .priority-chips button.active {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: #0c1815;
+  background: var(--sky-blue);
+  border-color: var(--sky-blue);
+  color: #0E2438;
   font-weight: 700;
 }
 
 .priority-note {
   margin-top: 10px;
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted-light);
   line-height: 1.6;
 }
 
@@ -1365,19 +1377,19 @@ a:hover {
 
 .coverage-row span {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted-light);
 }
 
 .coverage-track {
   height: 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
 }
 
 .coverage-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--teal2), var(--gold));
+  background: linear-gradient(90deg, var(--deep-blue), var(--sky-blue));
   border-radius: 999px;
   transition: width 0.4s ease;
 }
@@ -1390,10 +1402,10 @@ a:hover {
 
 .planner-summary {
   margin-top: 20px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
   padding: 30px 36px;
-  background: linear-gradient(145deg, #102622, #071412);
+  background: linear-gradient(145deg, #173857, #0F263D);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1421,7 +1433,7 @@ a:hover {
 .summary-stats small {
   font-size: 10px;
   letter-spacing: 0.14em;
-  color: var(--gold);
+  color: var(--sky-blue);
   font-weight: 700;
 }
 
@@ -1429,7 +1441,7 @@ a:hover {
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: 800;
-  color: var(--text);
+  color: var(--soft-white);
 }
 
 .summary-actions {
@@ -1438,11 +1450,13 @@ a:hover {
   flex-wrap: wrap;
 }
 
-/* 06 / SMART ASSESSMENT WIZARD */
+/* =========================================================
+   06 / SMART ASSESSMENT WIZARD
+   ========================================================= */
 .assessment-wizard {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
-  background: linear-gradient(145deg, rgba(20, 48, 44, 0.9), rgba(7, 17, 15, 0.98));
+  background: linear-gradient(145deg, rgba(24, 60, 92, 0.92), rgba(15, 38, 61, 0.98));
   padding: 36px;
   box-shadow: var(--shadow);
 }
@@ -1456,14 +1470,14 @@ a:hover {
 
 .assessment-progress i {
   height: 1px;
-  background: var(--line);
+  background: rgba(255, 255, 255, 0.12);
   flex: 1;
 }
 
 .progress-step {
   width: 40px;
   height: 40px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.3);
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -1474,9 +1488,9 @@ a:hover {
 }
 
 .progress-step.active, .progress-step.done {
-  background: rgba(216, 170, 72, 0.15);
-  border-color: var(--gold);
-  color: var(--gold2);
+  background: rgba(103, 186, 244, 0.2);
+  border-color: var(--sky-blue);
+  color: var(--sky-blue);
 }
 
 .assessment-step {
@@ -1499,7 +1513,7 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.16em;
   font-weight: 800;
-  color: var(--gold2);
+  color: var(--sky-blue);
   margin-bottom: 8px;
 }
 
@@ -1510,7 +1524,7 @@ a:hover {
 
 .step-copy {
   font-size: 14px;
-  color: var(--muted);
+  color: var(--text-muted-light);
   margin-bottom: 24px;
 }
 
@@ -1521,8 +1535,8 @@ a:hover {
 }
 
 .property-option {
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-sm);
   padding: 20px 14px;
   cursor: pointer;
@@ -1541,17 +1555,17 @@ a:hover {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #b7cdc9;
+  color: #B6D5EE;
 }
 
 .property-option.active, .property-option:hover {
-  border-color: var(--gold);
-  background: rgba(216, 170, 72, 0.12);
+  border-color: var(--sky-blue);
+  background: rgba(103, 186, 244, 0.18);
   transform: translateY(-2px);
 }
 
 .property-option.active span {
-  color: var(--white);
+  color: var(--soft-white);
 }
 
 .planner-input-grid {
@@ -1564,15 +1578,15 @@ a:hover {
 .planner-input-grid > label {
   font-size: 12px;
   letter-spacing: 0.1em;
-  color: var(--muted);
+  color: var(--text-muted-light);
   font-weight: 700;
 }
 
 .stepper {
   margin-top: 8px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.25);
   border-radius: 14px;
-  background: #081614;
+  background: #0E2438;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1584,8 +1598,8 @@ a:hover {
   height: 38px;
   border: 0;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--soft-white);
   font-size: 20px;
   cursor: pointer;
 }
@@ -1593,13 +1607,13 @@ a:hover {
 .stepper strong {
   font-family: var(--font-display);
   font-size: 18px;
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .question-label {
   font-size: 12px;
   letter-spacing: 0.12em;
-  color: #cfe1dd;
+  color: #D2E6F5;
   font-weight: 800;
   margin: 20px 0 10px;
 }
@@ -1611,9 +1625,9 @@ a:hover {
 }
 
 .check-options button, .remote-choice button {
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
-  color: #b7cdc9;
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  color: #B6D5EE;
   border-radius: 12px;
   padding: 12px 18px;
   font-size: 13px;
@@ -1623,9 +1637,9 @@ a:hover {
 }
 
 .check-options button.active, .remote-choice button.active {
-  border-color: var(--gold);
-  background: rgba(216, 170, 72, 0.12);
-  color: var(--gold2);
+  border-color: var(--sky-blue);
+  background: rgba(103, 186, 244, 0.18);
+  color: var(--sky-blue);
   font-weight: 700;
 }
 
@@ -1637,8 +1651,8 @@ a:hover {
 
 .protection-options button {
   padding: 22px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-sm);
   text-align: left;
   cursor: pointer;
@@ -1649,19 +1663,19 @@ a:hover {
   display: block;
   font-family: var(--font-display);
   font-size: 14px;
-  color: var(--gold2);
+  color: var(--sky-blue);
   margin-bottom: 8px;
 }
 
 .protection-options button span {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted-light);
   line-height: 1.6;
 }
 
 .protection-options button.active {
-  border-color: var(--gold);
-  background: rgba(216, 170, 72, 0.12);
+  border-color: var(--sky-blue);
+  background: rgba(103, 186, 244, 0.18);
 }
 
 .remote-choice {
@@ -1674,10 +1688,10 @@ a:hover {
   margin-top: 18px;
   padding: 14px;
   border-radius: 12px;
-  background: rgba(18, 131, 123, 0.1);
-  border: 1px solid rgba(18, 131, 123, 0.3);
+  background: rgba(103, 186, 244, 0.12);
+  border: 1px solid var(--line-sky);
   font-size: 13px;
-  color: #cfe1dd;
+  color: #D2E6F5;
 }
 
 .plan-result-head {
@@ -1686,23 +1700,23 @@ a:hover {
   align-items: flex-start;
   gap: 20px;
   padding-bottom: 24px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .plan-result-head h3 {
   font-size: 44px;
-  color: var(--gold2);
+  color: var(--sky-blue);
   margin: 0 0 6px;
 }
 
 .plan-badge {
   padding: 6px 14px;
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--line-sky);
   border-radius: 999px;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.1em;
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .plan-metrics {
@@ -1714,9 +1728,9 @@ a:hover {
 
 .plan-metrics div {
   padding: 16px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .plan-metrics span {
@@ -1730,7 +1744,7 @@ a:hover {
 
 .plan-metrics strong {
   font-size: 15px;
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .plan-zones #planZones {
@@ -1742,16 +1756,16 @@ a:hover {
 .plan-zone-pill {
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid var(--line-gold);
-  background: rgba(216, 170, 72, 0.08);
-  color: var(--gold2);
+  border: 1px solid var(--line-sky);
+  background: rgba(103, 186, 244, 0.15);
+  color: var(--sky-blue);
   font-size: 12px;
 }
 
 .plan-summary-line {
   margin-top: 20px;
   font-size: 14px;
-  color: var(--text);
+  color: var(--soft-white);
 }
 
 .wizard-actions {
@@ -1767,7 +1781,9 @@ a:hover {
   margin-top: 16px;
 }
 
-/* 07 / MONITORING APP SIMULATION */
+/* =========================================================
+   07 / MONITORING APP SIMULATION
+   ========================================================= */
 .monitoring-layout {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -1775,9 +1791,9 @@ a:hover {
 }
 
 .monitor-dashboard {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
-  background: #050d0c;
+  background: #0A1B2B;
   overflow: hidden;
   box-shadow: var(--shadow);
 }
@@ -1788,13 +1804,13 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 12px;
   letter-spacing: 0.1em;
 }
 
 .live-dot {
-  color: #ff5e4d;
+  color: #FF5E4D;
   margin-right: 6px;
 }
 
@@ -1802,22 +1818,22 @@ a:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2px;
-  background: #020504;
+  background: #050E17;
 }
 
 .monitor-feed {
   min-height: 190px;
   position: relative;
   border: 0;
-  background: radial-gradient(circle at 50% 40%, rgba(18, 131, 123, 0.45), #06110f 65%, #020605);
-  color: var(--white);
+  background: radial-gradient(circle at 50% 40%, rgba(103, 186, 244, 0.35), #0F263D 65%, #050E17);
+  color: var(--soft-white);
   padding: 16px;
   text-align: left;
   cursor: pointer;
 }
 
 .monitor-feed.active {
-  box-shadow: inset 0 0 0 2px var(--gold);
+  box-shadow: inset 0 0 0 2px var(--sky-blue);
 }
 
 .feed-status {
@@ -1825,7 +1841,7 @@ a:hover {
   top: 14px;
   right: 14px;
   font-size: 10px;
-  color: #54d4b5;
+  color: #54D4B5;
   font-weight: 700;
   letter-spacing: 0.1em;
 }
@@ -1844,22 +1860,22 @@ a:hover {
   left: 16px;
   bottom: 16px;
   font-size: 11px;
-  color: var(--muted);
+  color: #9EC7E6;
   letter-spacing: 0.1em;
 }
 
 .monitor-tabs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .monitor-tabs button {
-  background: #071412;
+  background: #0E2438;
   border: 0;
-  border-right: 1px solid var(--line);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   padding: 14px 8px;
-  color: var(--muted);
+  color: var(--text-muted-light);
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
@@ -1870,8 +1886,8 @@ a:hover {
 }
 
 .monitor-tabs button.active {
-  color: var(--gold2);
-  background: rgba(216, 170, 72, 0.08);
+  color: var(--sky-blue);
+  background: rgba(103, 186, 244, 0.15);
 }
 
 .monitor-info {
@@ -1883,7 +1899,7 @@ a:hover {
 }
 
 .monitor-info b {
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .monitor-copy {
@@ -1895,9 +1911,9 @@ a:hover {
 .phone-preview {
   width: 160px;
   height: 320px;
-  border: 6px solid #142824;
+  border: 6px solid #1A3E61;
   border-radius: 28px;
-  background: #06110f;
+  background: #0B1D2D;
   padding: 10px;
   box-shadow: var(--shadow);
 }
@@ -1906,17 +1922,17 @@ a:hover {
   display: flex;
   justify-content: space-between;
   font-size: 9px;
-  color: var(--muted);
+  color: #9EC7E6;
   margin-bottom: 8px;
 }
 
 .phone-preview-feed {
   height: 150px;
   border-radius: 12px;
-  background: radial-gradient(circle at 50% 40%, #1e453f, #081412 70%);
+  background: radial-gradient(circle at 50% 40%, #1E4E7A, #0D2236 70%);
   padding: 8px;
   font-size: 9px;
-  color: #54d4b5;
+  color: #54D4B5;
 }
 
 .phone-preview-buttons {
@@ -1929,9 +1945,9 @@ a:hover {
 .phone-preview-buttons button {
   padding: 6px 4px;
   font-size: 9px;
-  border: 1px solid var(--line);
-  background: #0a1b18;
-  color: #b7cdc9;
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: #14324D;
+  color: #B6D5EE;
   border-radius: 6px;
   cursor: pointer;
 }
@@ -1943,25 +1959,25 @@ a:hover {
 
 .monitor-features div {
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .monitor-features b {
   display: block;
   font-size: 12px;
   letter-spacing: 0.08em;
-  color: var(--text);
+  color: var(--soft-white);
   margin-bottom: 4px;
 }
 
 .monitor-features span {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--text-muted-light);
 }
 
 .monitor-cta {
   grid-column: 1 / -1;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 20px;
 }
 
@@ -1975,7 +1991,9 @@ a:hover {
   margin-bottom: 16px;
 }
 
-/* 08 / NIGHT LAB */
+/* =========================================================
+   08 / NIGHT LAB
+   ========================================================= */
 .night-lab {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -1986,9 +2004,9 @@ a:hover {
   min-height: 520px;
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
-  background: #081412;
+  background: #0B1D2D;
   box-shadow: var(--shadow);
 }
 
@@ -1998,11 +2016,11 @@ a:hover {
 }
 
 .day-scene {
-  background: linear-gradient(#5a8d94 0 58%, #2e4a35 58%);
+  background: linear-gradient(#4B8BB8 0 58%, #2A5475 58%);
 }
 
 .night-scene-layer {
-  background: linear-gradient(#0a1424 0 58%, #07100f 58%);
+  background: linear-gradient(#081726 0 58%, #040D17 58%);
   clip-path: inset(0 0 0 50%);
 }
 
@@ -2019,7 +2037,7 @@ a:hover {
   bottom: 26%;
   width: 50%;
   height: 38%;
-  background: linear-gradient(90deg, #24352e, #1a2823);
+  background: linear-gradient(90deg, #1C3E5E, #142F47);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -2027,7 +2045,7 @@ a:hover {
   position: absolute;
   inset: auto 0 0 0;
   height: 26%;
-  background: #182823;
+  background: #11273B;
 }
 
 .scene-car {
@@ -2037,8 +2055,8 @@ a:hover {
   width: 20%;
   height: 10%;
   border-radius: 20px 20px 6px 6px;
-  background: #253832;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #1F4569;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .night-stage-label {
@@ -2046,15 +2064,15 @@ a:hover {
   top: 18px;
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(6, 16, 15, 0.85);
-  border: 1px solid var(--line);
+  background: rgba(14, 34, 52, 0.9);
+  border: 1px solid var(--line-sky);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
 }
 
-.day-label { left: 18px; color: #cfe1dd; }
-.night-label { right: 18px; color: var(--gold2); }
+.day-label { left: 18px; color: #D2E6F5; }
+.night-label { right: 18px; color: var(--sky-blue); }
 
 .night-slider-line {
   position: absolute;
@@ -2077,8 +2095,8 @@ a:hover {
   appearance: none;
   width: 4px;
   height: 100vh;
-  background: var(--gold);
-  box-shadow: 0 0 10px var(--gold);
+  background: var(--sky-blue);
+  box-shadow: 0 0 12px var(--sky-blue);
 }
 
 .night-slider-line span {
@@ -2087,18 +2105,18 @@ a:hover {
   transform: translateY(-50%);
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(6, 16, 15, 0.9);
-  border: 1px solid var(--line-gold);
-  color: var(--gold2);
+  background: rgba(14, 34, 52, 0.95);
+  border: 1px solid var(--line-sky);
+  color: var(--sky-blue);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.14em;
 }
 
 .night-controls {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
-  background: linear-gradient(145deg, #102622, #071412);
+  background: linear-gradient(145deg, #173857, #0F263D);
   padding: 28px;
   display: flex;
   flex-direction: column;
@@ -2111,8 +2129,8 @@ a:hover {
 }
 
 .technology-options button {
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-sm);
   padding: 14px 16px;
   text-align: left;
@@ -2123,17 +2141,17 @@ a:hover {
 .technology-options button b {
   display: block;
   font-size: 13px;
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .technology-options button span {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted-light);
 }
 
 .technology-options button.active {
-  border-color: var(--gold);
-  background: rgba(216, 170, 72, 0.12);
+  border-color: var(--sky-blue);
+  background: rgba(103, 186, 244, 0.18);
 }
 
 .night-meters {
@@ -2151,21 +2169,21 @@ a:hover {
 .night-meters span {
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: var(--muted);
+  color: var(--text-muted-light);
   font-weight: 700;
 }
 
 .night-meters i {
   height: 6px;
   border-radius: 999px;
-  background: #14302b;
+  background: #11273B;
   overflow: hidden;
 }
 
 .night-meters i b {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, var(--teal2), var(--gold));
+  background: linear-gradient(90deg, var(--deep-blue), var(--sky-blue));
   border-radius: 999px;
   transition: width 0.4s ease;
 }
@@ -2184,31 +2202,31 @@ a:hover {
 .environment-options button {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
-  color: #b7cdc9;
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  color: #B6D5EE;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
 }
 
 .environment-options button.active {
-  border-color: var(--gold);
-  background: rgba(216, 170, 72, 0.12);
-  color: var(--gold2);
+  border-color: var(--sky-blue);
+  background: rgba(103, 186, 244, 0.18);
+  color: var(--sky-blue);
 }
 
 .environment-result {
   margin-top: 10px;
   padding: 14px;
   border-radius: 12px;
-  border: 1px solid var(--line);
-  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .environment-result b {
   font-size: 13px;
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .environment-result p {
@@ -2218,15 +2236,15 @@ a:hover {
 
 .environment-result strong {
   font-size: 12px;
-  color: #cfe1dd;
+  color: #D2E6F5;
 }
 
 .night-bottom-cta {
   margin-top: 20px;
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--line-sky);
   border-radius: var(--radius);
   padding: 24px 30px;
-  background: rgba(216, 170, 72, 0.05);
+  background: rgba(103, 186, 244, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2238,7 +2256,9 @@ a:hover {
   margin-bottom: 4px;
 }
 
-/* 09 / INSTALLATION JOURNEY */
+/* =========================================================
+   09 / INSTALLATION JOURNEY
+   ========================================================= */
 .service-journey {
   display: flex;
   align-items: center;
@@ -2246,23 +2266,23 @@ a:hover {
   gap: 12px;
   margin: 30px 0 20px;
   padding: 14px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
   overflow-x: auto;
 }
 
 .service-journey i {
   width: 24px;
   height: 1px;
-  background: var(--line-gold);
+  background: var(--line-sky);
   flex-shrink: 0;
 }
 
 .service-step {
   border: 1px solid transparent;
   background: transparent;
-  color: var(--muted);
+  color: var(--text-muted-light);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2276,7 +2296,7 @@ a:hover {
 .service-step b {
   font-family: var(--font-display);
   font-size: 13px;
-  color: var(--gold);
+  color: var(--sky-blue);
 }
 
 .service-step span {
@@ -2286,9 +2306,9 @@ a:hover {
 }
 
 .service-step.active {
-  background: rgba(216, 170, 72, 0.12);
-  border-color: var(--gold);
-  color: var(--white);
+  background: rgba(103, 186, 244, 0.18);
+  border-color: var(--sky-blue);
+  color: var(--soft-white);
 }
 
 .service-detail {
@@ -2299,9 +2319,9 @@ a:hover {
 }
 
 .service-detail-copy, .service-visual {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
-  background: linear-gradient(145deg, #102622, #071412);
+  background: linear-gradient(145deg, #173857, #0F263D);
   padding: 36px;
 }
 
@@ -2318,7 +2338,7 @@ a:hover {
 
 .service-includes span {
   font-size: 14px;
-  color: #cfe1dd;
+  color: #D2E6F5;
 }
 
 .service-visual {
@@ -2326,22 +2346,24 @@ a:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background: radial-gradient(circle at 50% 50%, rgba(18, 131, 123, 0.2), #071412 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(103, 186, 244, 0.22), #0D2236 70%);
 }
 
 .service-node {
   padding: 12px 18px;
   border-radius: 12px;
-  border: 1px solid var(--line);
-  background: rgba(6, 16, 15, 0.85);
-  color: #cfe1dd;
+  border: 1px solid var(--line-sky);
+  background: rgba(14, 34, 52, 0.92);
+  color: #D2E6F5;
   font-size: 13px;
   font-weight: 700;
   width: max-content;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* 10 / GUARANTEES GRID (NEW) */
+/* =========================================================
+   10 / GUARANTEES GRID
+   ========================================================= */
 .guarantee-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -2350,15 +2372,15 @@ a:hover {
 
 .guarantee-card {
   padding: 30px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
-  background: linear-gradient(145deg, rgba(16, 38, 34, 0.7), rgba(7, 17, 15, 0.9));
+  background: linear-gradient(145deg, rgba(24, 60, 92, 0.8), rgba(15, 38, 61, 0.95));
   transition: all 0.3s ease;
 }
 
 .guarantee-card:hover {
   transform: translateY(-5px);
-  border-color: var(--line-gold);
+  border-color: var(--sky-blue);
   box-shadow: var(--shadow);
 }
 
@@ -2367,7 +2389,7 @@ a:hover {
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: var(--gold2);
+  color: var(--sky-blue);
   margin-bottom: 12px;
 }
 
@@ -2379,10 +2401,12 @@ a:hover {
 .guarantee-card p {
   font-size: 14px;
   line-height: 1.65;
-  color: var(--muted);
+  color: var(--text-muted-light);
 }
 
-/* 11 / CASE STUDIES & PORTFOLIO */
+/* =========================================================
+   11 / CASE STUDIES & PORTFOLIO
+   ========================================================= */
 .application-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2390,9 +2414,9 @@ a:hover {
 }
 
 .application-card {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
-  background: linear-gradient(145deg, #102622, #071412);
+  background: linear-gradient(145deg, #173857, #0F263D);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -2402,7 +2426,7 @@ a:hover {
 
 .application-card:hover, .application-card.active {
   transform: translateY(-5px);
-  border-color: var(--line-gold);
+  border-color: var(--sky-blue);
   box-shadow: var(--shadow);
 }
 
@@ -2415,7 +2439,7 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.12em;
   font-weight: 800;
-  color: var(--gold);
+  color: var(--sky-blue);
 }
 
 .application-card h3 {
@@ -2441,8 +2465,8 @@ a:hover {
   letter-spacing: 0.08em;
   padding: 4px 8px;
   border-radius: 999px;
-  border: 1px solid var(--line);
-  color: #b7cdc9;
+  border: 1px solid rgba(103, 186, 244, 0.22);
+  color: #C0DBF0;
 }
 
 .application-open {
@@ -2451,7 +2475,7 @@ a:hover {
   padding: 0;
   font-size: 12px;
   font-weight: 700;
-  color: var(--gold2);
+  color: var(--sky-blue);
   cursor: pointer;
   text-align: left;
 }
@@ -2459,9 +2483,9 @@ a:hover {
 .application-detail {
   display: none;
   margin-top: 20px;
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--line-sky);
   border-radius: var(--radius);
-  background: linear-gradient(145deg, #102924, #071412);
+  background: linear-gradient(145deg, #1A4063, #0F263D);
   padding: 34px;
 }
 
@@ -2485,9 +2509,9 @@ a:hover {
 
 .coverage-map {
   min-height: 280px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius-sm);
-  background: #0a1b18;
+  background: #0E2438;
   position: relative;
   padding: 20px;
 }
@@ -2510,7 +2534,7 @@ a:hover {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--muted);
+  color: var(--text-muted-light);
   margin-bottom: 6px;
 }
 
@@ -2518,18 +2542,20 @@ a:hover {
   display: block;
   height: 6px;
   border-radius: 999px;
-  background: #14302b;
+  background: #11273B;
   overflow: hidden;
 }
 
 .priority-meter i b {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, var(--teal2), var(--gold));
+  background: linear-gradient(90deg, var(--deep-blue), var(--sky-blue));
   border-radius: 999px;
 }
 
-/* 12 / ABOUT SECTION */
+/* =========================================================
+   12 / ABOUT SECTION
+   ========================================================= */
 .about {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -2537,10 +2563,10 @@ a:hover {
 }
 
 .about-hero-copy {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
   padding: 40px;
-  background: linear-gradient(145deg, #102622, #071412);
+  background: linear-gradient(145deg, #173857, #0F263D);
 }
 
 .about-label {
@@ -2553,7 +2579,7 @@ a:hover {
 
 .about-lead {
   font-size: 18px;
-  color: var(--text);
+  color: var(--soft-white);
   margin-bottom: 14px;
 }
 
@@ -2563,26 +2589,26 @@ a:hover {
   margin: 24px 0;
   padding: 20px;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(103, 186, 244, 0.2);
 }
 
 .statement-mark {
-  color: var(--gold);
+  color: var(--sky-blue);
   font-size: 24px;
 }
 
 .about-statement b {
   display: block;
   font-size: 15px;
-  color: var(--gold2);
+  color: var(--sky-blue);
   margin-bottom: 6px;
 }
 
 .about-contact-panel {
   margin-top: 30px;
   padding-top: 24px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: grid;
   gap: 18px;
 }
@@ -2597,13 +2623,13 @@ a:hover {
   font-size: 12px;
   letter-spacing: 0.1em;
   font-weight: 800;
-  color: var(--muted);
+  color: var(--text-muted-light);
 }
 
 .visit-price b {
   font-family: var(--font-display);
   font-size: 32px;
-  color: var(--gold2);
+  color: var(--sky-blue);
 }
 
 .visit-price small {
@@ -2618,10 +2644,10 @@ a:hover {
 }
 
 .service-area-panel {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius);
   padding: 40px;
-  background: linear-gradient(145deg, #102622, #071412);
+  background: linear-gradient(145deg, #173857, #0F263D);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2630,8 +2656,8 @@ a:hover {
 .service-map {
   height: 220px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--line);
-  background: #081614;
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: #0E2438;
   position: relative;
   overflow: hidden;
   margin: 20px 0;
@@ -2640,11 +2666,11 @@ a:hover {
 .map-pin {
   position: absolute;
   font-size: 12px;
-  color: var(--gold);
+  color: var(--sky-blue);
 }
 
 .map-pin b {
-  color: var(--text);
+  color: var(--soft-white);
   margin-left: 4px;
 }
 
@@ -2669,26 +2695,28 @@ a:hover {
   flex: 1;
   padding: 12px 16px;
   border-radius: 12px;
-  border: 1px solid var(--line);
-  background: #06110f;
-  color: var(--text);
+  border: 1px solid rgba(103, 186, 244, 0.25);
+  background: #0B1D2D;
+  color: var(--soft-white);
   font-family: var(--font-sans);
   font-size: 13px;
   outline: none;
 }
 
 .service-input-row input:focus {
-  border-color: var(--gold);
+  border-color: var(--sky-blue);
 }
 
 #serviceAreaResult {
   display: block;
   margin-top: 8px;
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted-light);
 }
 
-/* 13 / FAQ SECTION */
+/* =========================================================
+   13 / FAQ SECTION
+   ========================================================= */
 .faq-toolbar {
   margin-bottom: 24px;
 }
@@ -2703,9 +2731,9 @@ a:hover {
 .faq-filter {
   padding: 8px 16px;
   border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
-  color: #b7cdc9;
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  color: #B6D5EE;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
@@ -2713,9 +2741,9 @@ a:hover {
 }
 
 .faq-filter.active, .faq-filter:hover {
-  border-color: var(--gold);
-  background: rgba(216, 170, 72, 0.12);
-  color: var(--gold2);
+  border-color: var(--sky-blue);
+  background: rgba(103, 186, 244, 0.18);
+  color: var(--sky-blue);
 }
 
 .faq {
@@ -2726,9 +2754,9 @@ a:hover {
 }
 
 .faq-item {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(103, 186, 244, 0.2);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
   overflow: hidden;
 }
 
@@ -2736,7 +2764,7 @@ a:hover {
   width: 100%;
   background: none;
   border: 0;
-  color: var(--text);
+  color: var(--soft-white);
   text-align: left;
   padding: 20px 24px;
   font-family: var(--font-sans);
@@ -2749,12 +2777,12 @@ a:hover {
 }
 
 .faq-q span {
-  color: var(--text);
+  color: var(--soft-white);
 }
 
 .faq-q b {
   font-size: 20px;
-  color: var(--gold);
+  color: var(--sky-blue);
 }
 
 .faq-a {
@@ -2762,7 +2790,7 @@ a:hover {
   overflow: hidden;
   transition: max-height 0.35s ease, padding 0.3s ease;
   padding: 0 24px;
-  color: var(--muted);
+  color: var(--text-muted-light);
   font-size: 14px;
   line-height: 1.7;
 }
@@ -2774,10 +2802,10 @@ a:hover {
 
 .faq-final-cta {
   margin-top: 40px;
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--line-sky);
   border-radius: var(--radius);
   padding: 36px 40px;
-  background: linear-gradient(145deg, #102622, #071412);
+  background: linear-gradient(145deg, #173857, #0F263D);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2796,12 +2824,14 @@ a:hover {
   flex-wrap: wrap;
 }
 
-/* 14 / CONTACT COMMAND CENTER */
+/* =========================================================
+   14 / CONTACT COMMAND CENTER
+   ========================================================= */
 .contact-command {
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--line-sky);
   border-radius: var(--radius);
-  background: radial-gradient(circle at 80% 30%, rgba(216, 170, 72, 0.12), transparent 40%),
-              linear-gradient(135deg, #102924, #06110f);
+  background: radial-gradient(circle at 80% 30%, rgba(103, 186, 244, 0.16), transparent 40%),
+              linear-gradient(135deg, #183E61, #0E2438);
   padding: 50px;
   margin-bottom: 80px;
 }
@@ -2818,7 +2848,7 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.18em;
   font-weight: 800;
-  color: var(--gold);
+  color: var(--sky-blue);
   margin-bottom: 8px;
 }
 
@@ -2832,18 +2862,18 @@ a:hover {
 .contact-action-card {
   padding: 28px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--line);
-  background: rgba(6, 16, 15, 0.85);
+  border: 1px solid rgba(103, 186, 244, 0.2);
+  background: rgba(14, 34, 52, 0.92);
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  color: var(--text);
+  color: var(--soft-white);
   transition: all 0.25s ease;
 }
 
 .contact-action-card:hover {
   transform: translateY(-4px);
-  border-color: var(--gold);
+  border-color: var(--sky-blue);
   box-shadow: var(--shadow);
 }
 
@@ -2856,7 +2886,7 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.12em;
   font-weight: 800;
-  color: var(--gold);
+  color: var(--sky-blue);
 }
 
 .contact-action-card h3 {
@@ -2872,13 +2902,13 @@ a:hover {
 
 .contact-action-card strong {
   font-size: 12px;
-  color: var(--gold2);
+  color: var(--sky-blue);
   letter-spacing: 0.08em;
 }
 
 .service-command-row {
   padding-top: 24px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2891,11 +2921,14 @@ a:hover {
   margin: 4px 0;
 }
 
-/* FOOTER */
+/* =========================================================
+   FOOTER (SOFT WHITE #FAFAFA)
+   ========================================================= */
 .footer {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(30, 70, 107, 0.15);
   padding: 60px max(20px, calc((100% - 1200px) / 2)) 100px;
-  background: #040908;
+  background: var(--soft-white); /* Soft White Palette */
+  color: var(--charcoal);       /* Charcoal text */
 }
 
 .footer-brand-hero {
@@ -2903,9 +2936,23 @@ a:hover {
   margin-bottom: 40px;
 }
 
+.footer-brand-logo-wrap {
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.footer-brand-logo {
+  height: 76px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 14px rgba(30, 70, 107, 0.2));
+}
+
 .footer-brand-hero p {
   margin-top: 14px;
-  font-size: 13px;
+  font-size: 14px;
+  color: var(--muted);
 }
 
 .footer-command-grid {
@@ -2913,7 +2960,7 @@ a:hover {
   grid-template-columns: 1fr 1fr 1fr 1.2fr;
   gap: 40px;
   padding-bottom: 40px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(30, 70, 107, 0.12);
 }
 
 .footer-col {
@@ -2926,23 +2973,26 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.16em;
   font-weight: 800;
-  color: var(--gold);
+  color: var(--deep-blue);
   margin-bottom: 6px;
 }
 
 .footer-col a {
   font-size: 13px;
-  color: var(--muted);
+  color: #3B4B59;
+  transition: all 0.2s ease;
 }
 
 .footer-col a:hover {
-  color: var(--white);
+  color: var(--deep-blue);
+  transform: translateX(3px);
 }
 
 .footer-contact a {
   display: block;
   font-size: 14px;
-  color: #cfe1dd;
+  color: var(--deep-blue);
+  font-weight: 600;
   margin-bottom: 8px;
 }
 
@@ -2955,9 +3005,16 @@ a:hover {
 .social-pill {
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(30, 70, 107, 0.2);
   font-size: 12px;
-  color: #b7cdc9;
+  color: var(--deep-blue);
+  background: #E8F2FA;
+  font-weight: 600;
+}
+
+.social-pill:hover {
+  background: #D9EBFA;
+  border-color: var(--sky-blue);
 }
 
 .footer-bottom {
@@ -2965,10 +3022,12 @@ a:hover {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: var(--muted-dark);
+  color: var(--muted);
 }
 
-/* STICKY MOBILE BOTTOM ACTION BAR */
+/* =========================================================
+   STICKY MOBILE BOTTOM ACTION BAR (SOFT WHITE)
+   ========================================================= */
 .mobile-bottom-bar {
   display: none;
   position: fixed;
@@ -2976,11 +3035,11 @@ a:hover {
   left: 0;
   right: 0;
   z-index: 90;
-  background: rgba(6, 16, 15, 0.92);
+  background: rgba(250, 250, 250, 0.96); /* Soft White */
   backdrop-filter: blur(18px);
-  border-top: 1px solid var(--line-gold);
+  border-top: 1px solid rgba(30, 70, 107, 0.15);
   padding: 10px 16px;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 -10px 30px rgba(30, 70, 107, 0.12);
 }
 
 .mobile-action-btn {
@@ -2991,9 +3050,9 @@ a:hover {
   gap: 8px;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text);
+  border: 1px solid rgba(30, 70, 107, 0.15);
+  background: #FFFFFF;
+  color: var(--charcoal);
   text-decoration: none;
   font-family: var(--font-sans);
   cursor: pointer;
@@ -3001,17 +3060,18 @@ a:hover {
 }
 
 .mobile-action-btn.call-action {
-  border-color: rgba(84, 212, 181, 0.4);
-  background: rgba(84, 212, 181, 0.08);
+  border-color: rgba(30, 70, 107, 0.25);
+  background: #EAF2F8;
+  color: var(--deep-blue);
 }
 
 .mobile-action-btn.wa-action {
-  border-color: var(--line-gold);
-  background: linear-gradient(135deg, rgba(216, 170, 72, 0.25), rgba(216, 170, 72, 0.1));
+  border-color: rgba(103, 186, 244, 0.5);
+  background: linear-gradient(135deg, #E5F3FD, #D0E9FC);
 }
 
 .mobile-action-btn.wa-action strong {
-  color: var(--gold2);
+  color: var(--deep-blue);
 }
 
 .m-icon {
@@ -3027,7 +3087,7 @@ a:hover {
 .m-text small {
   font-size: 9px;
   letter-spacing: 0.1em;
-  color: var(--muted-dark);
+  color: var(--muted);
   font-weight: 700;
 }
 
@@ -3036,7 +3096,9 @@ a:hover {
   line-height: 1.2;
 }
 
-/* MODAL */
+/* =========================================================
+   MODALS & LEAD FORM
+   ========================================================= */
 .modal {
   display: none;
   position: fixed;
@@ -3052,8 +3114,8 @@ a:hover {
 .modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(10, 25, 40, 0.88);
+  backdrop-filter: blur(14px);
 }
 
 .modal-card {
@@ -3061,11 +3123,11 @@ a:hover {
   width: min(640px, calc(100% - 32px));
   max-height: 90vh;
   overflow-y: auto;
-  background: linear-gradient(145deg, #122b27, #071412);
-  border: 1px solid var(--line-gold);
+  background: linear-gradient(145deg, #183D5F, #0E2438);
+  border: 1px solid var(--line-sky);
   border-radius: var(--radius);
   padding: 36px;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.85);
 }
 
 .modal-close {
@@ -3074,7 +3136,7 @@ a:hover {
   top: 16px;
   background: none;
   border: 0;
-  color: var(--muted);
+  color: var(--text-muted-light);
   font-size: 28px;
   cursor: pointer;
 }
@@ -3104,16 +3166,16 @@ a:hover {
   font-size: 11px;
   letter-spacing: 0.1em;
   font-weight: 700;
-  color: #cfe1dd;
+  color: #D2E6F5;
 }
 
 .form-field input, .form-field select, .form-field textarea {
   width: 100%;
-  background: #06110f;
-  border: 1px solid var(--line);
+  background: #0A1C2C;
+  border: 1px solid rgba(103, 186, 244, 0.25);
   border-radius: 12px;
   padding: 12px;
-  color: var(--white);
+  color: var(--soft-white);
   outline: none;
   font-family: var(--font-sans);
   font-size: 13px;
@@ -3125,7 +3187,7 @@ a:hover {
 }
 
 .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-  border-color: var(--gold);
+  border-color: var(--sky-blue);
 }
 
 .form-actions {
@@ -3138,9 +3200,9 @@ a:hover {
 .success {
   padding: 20px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(84, 212, 181, 0.35);
-  background: rgba(84, 212, 181, 0.08);
-  color: #d2f8ef;
+  border: 1px solid rgba(103, 186, 244, 0.4);
+  background: rgba(103, 186, 244, 0.12);
+  color: #E2F3FF;
   font-size: 14px;
 }
 
@@ -3148,7 +3210,9 @@ a:hover {
   display: none;
 }
 
-/* RESPONSIVE MEDIA QUERIES */
+/* =========================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================= */
 @media (max-width: 1050px) {
   .nav { display: none; }
   .header-actions { margin-left: auto; }
@@ -3190,11 +3254,12 @@ a:hover {
     left: 0;
     right: 0;
     top: 60px;
-    background: rgba(6, 16, 15, 0.96);
-    border: 1px solid var(--line);
+    background: #FAFAFA;
+    border: 1px solid rgba(30, 70, 107, 0.15);
     padding: 16px;
     border-radius: 20px;
     gap: 8px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.15);
   }
 
   .section {
