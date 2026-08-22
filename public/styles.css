@@ -1783,75 +1783,110 @@ blockquote {
   font-weight: 600;
 }
 
-.cta-direct-box {
+.cta-direct-box-beside {
   background: #FFFFFF;
   border-radius: var(--radius-lg);
-  padding: 26px;
+  padding: 30px;
   color: var(--text-dark);
   box-shadow: var(--shadow-card);
   display: flex;
-  flex-direction: column;
-  gap: 18px;
+  align-items: center;
+  gap: 28px;
 }
 
-.consultant-photo-curved-frame {
+.consultant-glow-circle-frame {
   position: relative;
-  width: 100%;
-  height: 240px;
-  border-radius: 120px 120px 20px 20px;
-  overflow: hidden;
-  border: 3px solid #FFFFFF;
-  box-shadow: 0 10px 28px rgba(15, 36, 62, 0.15);
-  background: var(--deep-navy);
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
 }
 
-.consultant-headshot-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.consultant-photo-curved-frame:hover .consultant-headshot-img {
-  transform: scale(1.04);
-}
-
-.consultant-live-badge {
+.glow-aura-ring {
   position: absolute;
-  bottom: 10px;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229, 169, 60, 0.45) 0%, rgba(56, 142, 230, 0.35) 60%, transparent 75%);
+  filter: blur(10px);
+  z-index: 0;
+  animation: pulseAura 3s infinite ease-in-out;
+}
+
+@keyframes pulseAura {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+.consultant-round-img {
+  position: relative;
+  z-index: 1;
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 8px 24px rgba(15, 36, 62, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+.consultant-live-badge-mini {
+  position: absolute;
+  bottom: -4px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 2;
   white-space: nowrap;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
+  gap: 5px;
+  padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(15, 36, 62, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--deep-navy);
+  border: 1.5px solid #FFFFFF;
   color: #FFFFFF;
-  font-size: 9.5px;
+  font-size: 8.5px;
   font-weight: 800;
   letter-spacing: 0.08em;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-.consultant-details h3 {
-  font-size: 19px;
+.consultant-details-beside {
+  flex: 1;
+}
+
+.consultant-role-kicker {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  color: var(--sky-blue);
   margin-bottom: 4px;
 }
 
-.consultant-details p {
+.consultant-details-beside h3 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.consultant-details-beside p {
   font-size: 12.5px;
   color: var(--text-muted);
   margin-bottom: 16px;
+  line-height: 1.5;
 }
 
 .cta-btns-col {
-  display: grid;
+  display: flex;
   gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cta-btns-col .btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 14px;
+  font-size: 13px;
 }
 
 /* ==========================================================================
@@ -2025,72 +2060,7 @@ blockquote {
 }
 
 /* ==========================================================================
-   16. STICKY MOBILE BOTTOM ACTION BAR
-   ========================================================================== */
-.mobile-action-bar {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 99;
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(16px);
-  border-top: 1px solid var(--border-card);
-  padding: 8px 10px;
-  padding-bottom: max(8px, env(safe-area-inset-bottom));
-  box-shadow: 0 -8px 24px rgba(15, 36, 62, 0.12);
-}
-
-.m-bar-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-light);
-  background: #FFFFFF;
-  text-decoration: none;
-  color: var(--deep-navy);
-  min-height: 44px;
-}
-
-.m-call {
-  background: var(--slate-light);
-  border-color: rgba(56, 142, 230, 0.2);
-}
-
-.m-wa {
-  background: linear-gradient(135deg, #E5F3FD, #D0E9FC);
-  border-color: rgba(56, 142, 230, 0.4);
-}
-
-.m-btn-icon {
-  font-size: 18px;
-}
-
-.m-btn-text {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.m-btn-text small {
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  font-weight: 700;
-}
-
-.m-btn-text strong {
-  font-size: 12px;
-  line-height: 1.15;
-}
-
-/* ==========================================================================
-   17. MODAL STYLING
+   16. MODAL STYLING
    ========================================================================== */
 .modal-backdrop-custom {
   display: none;
@@ -2180,7 +2150,7 @@ blockquote {
 }
 
 /* ==========================================================================
-   18. PERFECT MOBILE & TABLET RESPONSIVENESS (NO CROOKED LAYOUTS)
+   17. PERFECT MOBILE & TABLET RESPONSIVENESS (NO CROOKED LAYOUTS)
    ========================================================================== */
 @media (max-width: 1080px) {
   .nav { display: none; }
@@ -2203,16 +2173,11 @@ blockquote {
 }
 
 @media (max-width: 768px) {
-  body {
-    padding-bottom: 74px;
-  }
-
   .section {
     padding: 50px 0;
   }
 
   .top-info-bar { display: none; }
-  .mobile-action-bar { display: flex; gap: 6px; }
 
   .site-header.mobile-open .nav {
     display: grid;
@@ -2271,6 +2236,22 @@ blockquote {
     text-align: center;
   }
   .package-cta-bar .btn {
+    width: 100%;
+  }
+
+  .cta-direct-box-beside {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 18px;
+    gap: 18px;
+  }
+  .consultant-glow-circle-frame {
+    margin: 0 auto;
+  }
+  .cta-btns-col {
+    flex-direction: column;
+  }
+  .cta-btns-col .btn {
     width: 100%;
   }
 
