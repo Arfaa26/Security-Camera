@@ -1,6 +1,6 @@
 /**
  * AAN Security & IT Solutions — Executive Corporate Controller
- * Interactive Storage Calculator, Day/Night Lab, Modals, Fullscreen Album Lightbox, and WhatsApp Quotation Builders
+ * Interactive 3D Coverflow Polaroid Album, Storage Calculator, Day/Night Lab, Modals, Fullscreen Lightbox, and WhatsApp Quotation Builders
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,144 +29,265 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. CCTV Storage Calculator
+  // 3. 3D Coverflow Polaroid Album & Lightbox
+  initCoverflowAlbum();
+
+  // 4. CCTV Storage Calculator
   initStorageCalculator();
 
-  // 4. Day vs Night Comparison Slider
+  // 5. Day vs Night Comparison Slider
   initNightLab();
 
-  // 5. Area Coverage Checker
+  // 6. Area Coverage Checker
   initAreaChecker();
 
-  // 6. FAQ Accordion
+  // 7. FAQ Accordion
   initFaqAccordion();
 
-  // 7. Modals & Consultation Forms
+  // 8. Modals & Consultation Forms
   initModalsAndForms();
-
-  // 8. Fullscreen Project Album Lightbox
-  initGalleryLightbox();
 });
 
 /* ==========================================================================
-   FULLSCREEN PROJECT ALBUM LIGHTBOX
+   3D COVERFLOW POLAROID ALBUM ENGINE & FULLSCREEN LIGHTBOX
    ========================================================================== */
-function initGalleryLightbox() {
+function initCoverflowAlbum() {
+  const container = document.getElementById('coverflowContainer');
+  const cards = document.querySelectorAll('.cf-card');
+  const prevBtn = document.getElementById('cfPrevBtn');
+  const nextBtn = document.getElementById('cfNextBtn');
+  const dotsContainer = document.getElementById('cfDots');
+
+  const activeTag = document.getElementById('cfActiveTag');
+  const activeLoc = document.getElementById('cfActiveLoc');
+  const activeCounter = document.getElementById('cfActiveCounter');
+  const activeTitle = document.getElementById('cfActiveTitle');
+  const activeDesc = document.getElementById('cfActiveDesc');
+  const activeWaBtn = document.getElementById('cfActiveWaBtn');
+  const activeEnlargeBtn = document.getElementById('cfActiveEnlargeBtn');
+
+  // Lightbox Modal Elements
   const lightbox = document.getElementById('galleryLightbox');
-  const backdrop = document.getElementById('lightboxBackdrop');
-  const closeBtn = document.getElementById('lightboxClose');
-  const prevBtn = document.getElementById('lightboxPrev');
-  const nextBtn = document.getElementById('lightboxNext');
+  const lightboxBackdrop = document.getElementById('lightboxBackdrop');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const lightboxTag = document.getElementById('lightboxTag');
+  const lightboxLoc = document.getElementById('lightboxLocation');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxDesc = document.getElementById('lightboxDesc');
+  const lightboxWaBtn = document.getElementById('lightboxWaBtn');
 
-  const imgEl = document.getElementById('lightboxImg');
-  const counterEl = document.getElementById('lightboxCounter');
-  const tagEl = document.getElementById('lightboxTag');
-  const locEl = document.getElementById('lightboxLocation');
-  const titleEl = document.getElementById('lightboxTitle');
-  const descEl = document.getElementById('lightboxDesc');
-  const waBtn = document.getElementById('lightboxWaBtn');
+  if (!container || !cards.length) return;
 
-  const items = document.querySelectorAll('.clickable-gallery-item');
-  if (!lightbox || !items.length) return;
-
+  const totalCards = cards.length;
   let currentIndex = 0;
   const albumData = [];
 
-  items.forEach((item, idx) => {
+  // Parse card metadata and generate dot indicators
+  cards.forEach((card, i) => {
     albumData.push({
-      img: item.dataset.img || '',
-      title: item.dataset.title || '',
-      location: item.dataset.location || '',
-      tag: item.dataset.tag || '',
-      desc: item.dataset.desc || ''
+      img: card.dataset.img || '',
+      title: card.dataset.title || '',
+      location: card.dataset.location || '',
+      tag: card.dataset.tag || '',
+      desc: card.dataset.desc || ''
     });
 
-    item.addEventListener('click', (e) => {
-      // If user clicked the direct WhatsApp link inside card, let it open
-      if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('https://wa.me')) {
-        return;
+    // Create dot
+    if (dotsContainer) {
+      const dot = document.createElement('button');
+      dot.className = `cf-dot ${i === 0 ? 'active' : ''}`;
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => updateCoverflow(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    // Card click: if active center -> enlarge, if side -> rotate to it
+    card.addEventListener('click', () => {
+      if (i === currentIndex) {
+        openLightbox(i);
+      } else {
+        updateCoverflow(i);
       }
-      openLightbox(idx);
     });
   });
 
+  const dots = document.querySelectorAll('.cf-dot');
+
+  function updateCoverflow(newIndex) {
+    currentIndex = (newIndex + totalCards) % totalCards;
+
+    const isMobile = window.innerWidth <= 768;
+    const spacing = isMobile ? 55 : 95;
+    const centerOffset = isMobile ? 70 : 130;
+
+    cards.forEach((card, i) => {
+      let offset = i - currentIndex;
+
+      // Wrap-around shortest distance logic for circular carousel feel
+      if (offset > totalCards / 2) offset -= totalCards;
+      if (offset < -totalCards / 2) offset += totalCards;
+
+      const absOffset = Math.abs(offset);
+      const sign = Math.sign(offset);
+
+      if (offset === 0) {
+        // Center Active Card
+        card.style.transform = `translateX(0px) translateZ(80px) scale(1.08)`;
+        card.style.zIndex = '35';
+        card.style.opacity = '1';
+        card.style.filter = 'none';
+        card.classList.add('is-active');
+      } else if (absOffset <= 4) {
+        // Visible Fanned-Out Cards (Left and Right Wings)
+        const xTrans = sign * (centerOffset + (absOffset - 1) * spacing);
+        const zTrans = -40 * absOffset;
+        const yRot = sign * -30; // 3D Angled Rotation like coverflow polaroid
+        const scale = Math.max(0.72, 1 - absOffset * 0.08);
+        const opacity = Math.max(0.35, 1 - absOffset * 0.16);
+
+        card.style.transform = `translateX(${xTrans}px) translateZ(${zTrans}px) rotateY(${yRot}deg) scale(${scale})`;
+        card.style.zIndex = `${30 - absOffset}`;
+        card.style.opacity = `${opacity}`;
+        card.style.filter = `brightness(${Math.max(0.7, 1 - absOffset * 0.1)})`;
+        card.classList.remove('is-active');
+      } else {
+        // Hidden distant cards
+        const xTrans = sign * (centerOffset + 4 * spacing);
+        card.style.transform = `translateX(${xTrans}px) translateZ(-200px) scale(0.6)`;
+        card.style.zIndex = '1';
+        card.style.opacity = '0';
+        card.classList.remove('is-active');
+      }
+    });
+
+    // Update Dots
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentIndex);
+    });
+
+    // Update Active Details Panel
+    const cur = albumData[currentIndex];
+    if (cur) {
+      if (activeTag) activeTag.textContent = cur.tag;
+      if (activeLoc) activeLoc.textContent = cur.location;
+      if (activeCounter) activeCounter.textContent = `Project ${currentIndex + 1} of ${totalCards}`;
+      if (activeTitle) activeTitle.textContent = cur.title;
+      if (activeDesc) activeDesc.textContent = cur.desc;
+
+      if (activeWaBtn) {
+        const waMsg = `Hello Mr. Alekar (AAN Security and IT Solutions), I saw your live project "${cur.title}" (${cur.location}) and I want to get a quote for a similar setup for my property.`;
+        activeWaBtn.href = `https://wa.me/917218197119?text=${encodeURIComponent(waMsg)}`;
+      }
+    }
+  }
+
+  // Navigation handlers
+  if (prevBtn) prevBtn.addEventListener('click', () => updateCoverflow(currentIndex - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => updateCoverflow(currentIndex + 1));
+  if (activeEnlargeBtn) activeEnlargeBtn.addEventListener('click', () => openLightbox(currentIndex));
+
+  // Lightbox Modal Functions
   function openLightbox(index) {
     currentIndex = index;
     updateLightbox();
-    lightbox.classList.add('active');
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    if (lightbox) {
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   function closeLightbox() {
-    lightbox.classList.remove('active');
-    lightbox.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    if (lightbox) {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
   }
 
   function updateLightbox() {
-    const data = albumData[currentIndex];
-    if (!data) return;
+    const cur = albumData[currentIndex];
+    if (!cur) return;
 
-    if (imgEl) {
-      imgEl.src = data.img;
-      imgEl.alt = data.title;
+    if (lightboxImg) {
+      lightboxImg.src = cur.img;
+      lightboxImg.alt = cur.title;
     }
-    if (counterEl) counterEl.textContent = `Project ${currentIndex + 1} of ${albumData.length}`;
-    if (tagEl) tagEl.textContent = data.tag;
-    if (locEl) locEl.textContent = data.location;
-    if (titleEl) titleEl.textContent = data.title;
-    if (descEl) descEl.textContent = data.desc;
+    if (lightboxCounter) lightboxCounter.textContent = `Project ${currentIndex + 1} of ${totalCards}`;
+    if (lightboxTag) lightboxTag.textContent = cur.tag;
+    if (lightboxLoc) lightboxLoc.textContent = cur.location;
+    if (lightboxTitle) lightboxTitle.textContent = cur.title;
+    if (lightboxDesc) lightboxDesc.textContent = cur.desc;
 
-    if (waBtn) {
-      const waMsg = `Hello Mr. Alekar (AAN Security and IT Solutions), I saw your live project "${data.title}" (${data.location}) and I want to get a quote for a similar setup for my property.`;
-      waBtn.href = `https://wa.me/917218197119?text=${encodeURIComponent(waMsg)}`;
+    if (lightboxWaBtn) {
+      const waMsg = `Hello Mr. Alekar (AAN Security and IT Solutions), I saw your live project "${cur.title}" (${cur.location}) and I want to get a quote for a similar setup for my property.`;
+      lightboxWaBtn.href = `https://wa.me/917218197119?text=${encodeURIComponent(waMsg)}`;
     }
   }
 
-  function showNext() {
-    currentIndex = (currentIndex + 1) % albumData.length;
-    updateLightbox();
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % totalCards;
+      updateLightbox();
+      updateCoverflow(currentIndex);
+    });
   }
-
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + albumData.length) % albumData.length;
-    updateLightbox();
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+      updateLightbox();
+      updateCoverflow(currentIndex);
+    });
   }
-
-  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-  if (backdrop) backdrop.addEventListener('click', closeLightbox);
-  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
 
   // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('active')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') showNext();
-    if (e.key === 'ArrowLeft') showPrev();
+    if (lightbox && lightbox.classList.contains('active')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % totalCards;
+        updateLightbox();
+        updateCoverflow(currentIndex);
+      }
+      if (e.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+        updateLightbox();
+        updateCoverflow(currentIndex);
+      }
+    } else {
+      if (e.key === 'ArrowRight') updateCoverflow(currentIndex + 1);
+      if (e.key === 'ArrowLeft') updateCoverflow(currentIndex - 1);
+    }
   });
 
-  // Touch Swipe for Mobile
+  // Touch Swipe for Coverflow Stage
   let touchStartX = 0;
   let touchEndX = 0;
 
-  lightbox.addEventListener('touchstart', (e) => {
+  container.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
   }, { passive: true });
 
-  lightbox.addEventListener('touchend', (e) => {
+  container.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 40) {
+      if (diff < 0) updateCoverflow(currentIndex + 1);
+      else updateCoverflow(currentIndex - 1);
+    }
   }, { passive: true });
 
-  function handleSwipe() {
-    const diff = touchEndX - touchStartX;
-    if (Math.abs(diff) > 50) {
-      if (diff < 0) showNext();
-      else showPrev();
-    }
-  }
+  // Initial layout render
+  updateCoverflow(0);
+  window.addEventListener('resize', () => updateCoverflow(currentIndex));
 }
 
 /* ==========================================================================
