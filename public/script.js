@@ -68,7 +68,6 @@ function initStorageCalculator() {
   let mode = 'continuous';
 
   function calculate() {
-    // Bitrate mappings for H.265+ (in Mbps per stream at 25fps)
     const bitrates = {
       '1080p': 1.5,
       '2K': 3.0,
@@ -78,12 +77,10 @@ function initStorageCalculator() {
     const mbps = bitrates[resolution] || 3.0;
     const hours = mode === 'continuous' ? 24 : 14;
 
-    // Daily GB = (Bitrate Mbps * 3600s * Hours / 8192) * Cameras
     const dailyGb = Math.round(((mbps * 3600 * hours) / 8192) * cameras);
     const totalGb = Math.round(dailyGb * days);
     const totalTb = totalGb / 1000;
 
-    // Determine standard Surveillance HDD capacity
     let recommendedHdd = '1 TB';
     let brandModel = 'Western Digital Purple / Seagate SkyHawk';
 
@@ -95,10 +92,8 @@ function initStorageCalculator() {
     else if (totalTb <= 10) recommendedHdd = '10 TB';
     else recommendedHdd = '16 TB (RAID Enterprise)';
 
-    // Bandwidth
     const uploadSpeed = Math.ceil(cameras * (mbps * 0.85));
 
-    // Update UI
     if (countDisplay) countDisplay.textContent = `${cameras} ${cameras === 1 ? 'Camera' : 'Cameras'}`;
     if (hddSizeResult) hddSizeResult.textContent = recommendedHdd;
     if (hddNameResult) hddNameResult.textContent = `${brandModel} (24/7 Dedicated)`;
@@ -106,19 +101,18 @@ function initStorageCalculator() {
     if (totalGbResult) totalGbResult.textContent = `~${totalTb >= 1 ? totalTb.toFixed(1) + ' TB' : totalGb + ' GB'}`;
     if (bandwidthResult) bandwidthResult.textContent = `${uploadSpeed} Mbps Upload`;
 
-    // WhatsApp Action URL
     if (btnShareStorageWA) {
       btnShareStorageWA.onclick = () => {
         const text = [
-          `*AAN Security — Storage Calculation*`,
+          `Hello Mr. Alekar (AAN Security and IT Solutions), I want to get a quote for my property.`,
           `━━━━━━━━━━━━━━━━━━━`,
-          `📹 *Cameras:* ${cameras}`,
-          `🎯 *Resolution:* ${resolution === '1080p' ? '1080p Full HD' : resolution === '2K' ? '4MP 2K Super HD' : '8MP 4K Ultra HD'}`,
-          `📅 *Retention Days:* ${days} Days`,
-          `⚙️ *Recording Mode:* ${mode === 'continuous' ? '24/7 Continuous' : 'Smart Motion (~14h/day)'}`,
-          `💾 *Recommended HDD:* ${recommendedHdd} WD Purple / SkyHawk`,
+          `📹 Cameras: ${cameras}`,
+          `🎯 Resolution: ${resolution === '1080p' ? '1080p Full HD' : resolution === '2K' ? '4MP 2K Super HD' : '8MP 4K Ultra HD'}`,
+          `📅 Retention: ${days} Days`,
+          `⚙️ Recording Mode: ${mode === 'continuous' ? '24/7 Continuous' : 'Smart Motion (~14h/day)'}`,
+          `💾 Recommended HDD: ${recommendedHdd} WD Purple / SkyHawk`,
           `━━━━━━━━━━━━━━━━━━━`,
-          `Hi Faheem, please give me an exact price quote for this CCTV storage setup.`
+          `Please provide price and installation details.`
         ].join('\n');
 
         window.open(`https://wa.me/917218197119?text=${encodeURIComponent(text)}`, '_blank');
@@ -126,7 +120,6 @@ function initStorageCalculator() {
     }
   }
 
-  // Range Slider
   if (range) {
     range.addEventListener('input', (e) => {
       cameras = parseInt(e.target.value, 10);
@@ -134,7 +127,6 @@ function initStorageCalculator() {
     });
   }
 
-  // Pill selectors
   resBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       resBtns.forEach(b => b.classList.remove('active'));
@@ -193,7 +185,7 @@ function initAreaChecker() {
   const validAreas = [
     'mahad', 'mangaon', 'poladpur', 'birwadi', 'lonere', 'goregaon', 
     'nizampur', 'khed', 'dasgaon', 'nandgaon', 'vinhere', 'indapur', 
-    'varandh', 'tala', 'shrivardhan', 'nagothane', 'roha', 'raigad'
+    'varandh', 'tala', 'shrivardhan', 'nagothane', 'roha', 'raigad', 'rajewadi'
   ];
 
   function check() {
@@ -211,7 +203,7 @@ function initAreaChecker() {
       feedback.innerHTML = `✅ <b>Yes!</b> AAN Security actively services <strong>${input.value.trim()}</strong> with rapid on-site dispatch.`;
     } else {
       feedback.style.color = '#67BAF4';
-      feedback.innerHTML = `📍 We service most of Raigad. <a href="https://wa.me/917218197119?text=Hi%20Faheem,%20do%20you%20service%20${encodeURIComponent(input.value.trim())}?" target="_blank" style="color:#67BAF4; text-decoration:underline; font-weight:700;">Click to confirm ${input.value.trim()} on WhatsApp →</a>`;
+      feedback.innerHTML = `📍 We service most of Raigad. <a href="https://wa.me/917218197119?text=Hello%20Mr.%20Alekar%20(AAN%20Security%20and%20IT%20Solutions),%20I%20want%20to%20get%20a%20quote%20for%20my%20property%20in%20${encodeURIComponent(input.value.trim())}." target="_blank" style="color:#67BAF4; text-decoration:underline; font-weight:700;">Click to confirm ${input.value.trim()} on WhatsApp →</a>`;
     }
   }
 
@@ -251,7 +243,6 @@ function initModalsAndForms() {
   const quickConsultForm = document.getElementById('quickConsultForm');
 
   if (modal) {
-    // Open triggers
     document.querySelectorAll('[data-modal-open="quoteModal"]').forEach(btn => {
       btn.addEventListener('click', () => {
         const service = btn.dataset.service;
@@ -265,13 +256,11 @@ function initModalsAndForms() {
       });
     });
 
-    // Close triggers
     if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('open'));
     modal.addEventListener('click', (e) => {
       if (e.target === modal) modal.classList.remove('open');
     });
 
-    // Modal Form Submit
     if (leadModalForm) {
       leadModalForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -282,15 +271,14 @@ function initModalsAndForms() {
         const notes = document.getElementById('mNotes')?.value.trim() || 'None';
 
         const text = [
-          `*AAN Security — Property Assessment Request*`,
+          `Hello Mr. Alekar (AAN Security and IT Solutions), I want to get a quote for my property.`,
           `━━━━━━━━━━━━━━━━━━━`,
-          `👤 *Name:* ${name}`,
-          `📞 *Phone:* ${phone}`,
-          `📍 *Town / Area:* ${location}`,
-          `🛠️ *Service:* ${service}`,
-          `📝 *Notes:* ${notes}`,
-          `━━━━━━━━━━━━━━━━━━━`,
-          `Hello Faheem, please schedule an on-site ₹500 visit for my property.`
+          `👤 Name: ${name}`,
+          `📞 Phone: ${phone}`,
+          `📍 Town / Area: ${location}`,
+          `🛠️ Service: ${service}`,
+          `📝 Notes: ${notes}`,
+          `━━━━━━━━━━━━━━━━━━━`
         ].join('\n');
 
         modal.classList.remove('open');
@@ -299,7 +287,6 @@ function initModalsAndForms() {
     }
   }
 
-  // Quick Consult Form on Feature Banner
   if (quickConsultForm) {
     quickConsultForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -308,13 +295,11 @@ function initModalsAndForms() {
       const qcService = document.getElementById('qcService')?.value || 'Security Consultation';
 
       const text = [
-        `*AAN Security — Quick Consultation*`,
+        `Hello Mr. Alekar (AAN Security and IT Solutions), I want to get a quote for my property.`,
         `━━━━━━━━━━━━━━━━━━━`,
-        `👤 *Name:* ${qcName}`,
-        `📞 *Phone:* ${qcPhone}`,
-        `🛠️ *Interested In:* ${qcService}`,
-        `━━━━━━━━━━━━━━━━━━━`,
-        `Hi Faheem, I would like to get a quote and recommendations for this setup.`
+        `👤 Name: ${qcName}`,
+        `📞 Phone: ${qcPhone}`,
+        `🛠️ Interested In: ${qcService}`
       ].join('\n');
 
       window.open(`https://wa.me/917218197119?text=${encodeURIComponent(text)}`, '_blank');
